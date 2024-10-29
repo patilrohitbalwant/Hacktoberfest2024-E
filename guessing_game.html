@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        input {
+            margin: 10px;
+            padding: 10px;
+            width: 50px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Guess the Number!</h1>
+<p>I'm thinking of a number between 1 and 100.</p>
+<input type="number" id="guess" placeholder="Your guess">
+<button id="submit">Submit Guess</button>
+<div class="message" id="message"></div>
+
+<script>
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
+    const messageDiv = document.getElementById('message');
+    const submitButton = document.getElementById('submit');
+
+    submitButton.addEventListener('click', () => {
+        const userGuess = parseInt(document.getElementById('guess').value);
+        
+        if (isNaN(userGuess)) {
+            messageDiv.textContent = 'Please enter a valid number!';
+            return;
+        }
+        
+        if (userGuess < 1 || userGuess > 100) {
+            messageDiv.textContent = 'Number must be between 1 and 100!';
+            return;
+        }
+
+        if (userGuess === randomNumber) {
+            messageDiv.textContent = 'Congratulations! You guessed the number!';
+        } else if (userGuess < randomNumber) {
+            messageDiv.textContent = 'Too low! Try again.';
+        } else {
+            messageDiv.textContent = 'Too high! Try again.';
+        }
+    });
+</script>
+
+</body>
+</html>
